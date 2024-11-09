@@ -5,8 +5,17 @@ export default {
     './src/**/*.{js,jsx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primary': '#1E3A8A',
+        'secondary': '#F97316',
+        'background': '#242424',
+        'card-background': '#374151'
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
 

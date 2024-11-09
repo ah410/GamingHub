@@ -32,5 +32,24 @@
 # 3. Create Post Page
 1. Title (required)
 2. Description (optional)
-3. Image/Video (optional)
+3. Images (optional)
 4. Tags (optional) (prepopulated, can't create tags)
+
+# 4. Postgres Tables
+1. Posts
+    - Title
+        - must be unique
+        - character limit at 100
+        - not null
+    - Description
+        - doesn't need to be unique
+        - character limit at 600
+        - can be null
+    - Images/Videos
+        - doesn't need to be unique
+        - url to access is stored here
+        - can be null
+    - Tags
+        - doesn't need to be unique
+        - textual JSON data
+        - can be null

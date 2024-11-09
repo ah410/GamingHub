@@ -55,3 +55,4 @@
         - can be null
 
 # 5. Documentation That helped
+1. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)

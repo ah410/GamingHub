@@ -6,6 +6,7 @@ import './App.css';
 import Home from './pages/Home';
 import EditPost from './pages/EditPost';
 import CreatePost from './pages/CreatePost';
+import PostDetails from './pages/PostDetails';
 
 import Navigation from './components/Navigation';
 
@@ -41,10 +42,15 @@ const App = () => {
     {
       path: '/create_post',
       element: <CreatePost />
-    },    {
+    },   
+    {
       path: '/edit_post/:post_id',
       element: <EditPost />
     },
+    {
+      path: '/post/:post_id',
+      element: <PostDetails />
+    }
   ])
 
   return (

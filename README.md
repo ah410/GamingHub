@@ -58,3 +58,4 @@
 1. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 2. [Tailwind CSS](https://tailwindcss.com/)
 3. [useNavigate and useLocation](https://dev.to/esedev/how-to-pass-and-access-data-from-one-route-to-another-with-uselocation-usenavigate-usehistory-hooks-1g5m)
+4. [Date() In JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)

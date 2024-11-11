@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
+import { useState, useEffect } from "react";
+import formatDate from "../utils/formatDate.js";
 
 const PostCard = ({ post }) => {
     // Initialize the navigate hook
@@ -10,10 +12,16 @@ const PostCard = ({ post }) => {
         navigate('/post/' + post.id, { state: { post: post } });
     }
 
+    // Format the date to grab the time differential from current date to the date the post was created at
+    const [date, setDate] = useState({value: '', unit: ''})
+    useEffect(() => {
+        formatDate(post, setDate);
+    }, [post]);
+
     return (
         <div className="flex flex-col my-4 bg-primary w-full rounded-lg cursor-pointer hover:bg-primary-dark" onClick={handleClick}>
             <div className="posted-date p-2 flex justify-between">
-                <span className="">Post created at {post.created_at}</span>
+                <span className="">Posted {date.value} {date.unit} ago</span>
                 {/*Conditionally render tags if exist*/
                 post.tags ? post.tags.map((tag, index) => {
                     return (
@@ -49,7 +57,7 @@ const PostCard = ({ post }) => {
                 </div>
 
                 <div className="comments-div flex p-2">
-                    <span><ChatBubbleOvalLeftIcon className="size-6"/></span>
+                    <span><ChatBubbleOvalLeftIcon className="size-6 mr-1"/></span>
                     <span>{post.comments}</span>
                 </div>
             </div>

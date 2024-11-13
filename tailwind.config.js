@@ -11,6 +11,7 @@ export default {
         'primary-dark': '#172c6a',
         'secondary': '#F97316',
         'background': '#242424',
+        'background-hover': '#2e2e2e',
         'card-background': '#374151'
       }
     },

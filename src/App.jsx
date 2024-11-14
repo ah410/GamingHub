@@ -49,7 +49,7 @@ const App = () => {
     },
     {
       path: '/post/:post_id',
-      element: <PostDetails />
+      element: <PostDetails setPosts={setPosts} />
     }
   ])
 

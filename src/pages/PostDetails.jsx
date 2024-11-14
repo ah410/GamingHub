@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import { supabase } from "../../client.js";
 
-const PostDetails = () => {
+const PostDetails = ({posts, setPosts}) => {
     // Grab location and post_id
     const location = useLocation();
     const { post_id } = useParams();
@@ -21,6 +21,15 @@ const PostDetails = () => {
         const newUpvotes = post.upvotes + 1;
         setPost((prevState) => ({...prevState, upvotes: newUpvotes}));
 
+        // Update the posts state variable with the setstate function setPost().
+        // Use the prevState syntax then map over the prevState.
+        // As you map over every post in posts, use the ternary operator to differentiate between the post you are on, and the rest of the posts.
+        // If the post.id is the same as the post_id, then you spread the current post,and update the upvotes key to be post.upvotes + 1
+        // Else, you simply implicitly return the post dictionary to keep the rest of the posts the same.
+        setPosts((prevState) =>
+            prevState.map((post) => post.id === post_id ? {...post, upvotes: post.upvotes + 1} : post)
+        );
+
         const { data, error } = await supabase
         .from('posts')
         .update({upvotes: newUpvotes})
@@ -36,6 +45,10 @@ const PostDetails = () => {
     const updateDownvotes = async () => {
         const newDownvotes = post.downvotes + 1;
         setPost((prevState) => ({...prevState, downvotes: newDownvotes}));
+
+        setPosts((prevState) =>
+            prevState.map((post) => post.id === post_id ? {...post, downvotes: post.downvotes + 1} : post)
+        );
 
         const { data, error } = await supabase
         .from('posts')
@@ -53,6 +66,10 @@ const PostDetails = () => {
     const updateComments = async () => {
         const newComments = post.comments + 1;
         setPost((prevState) => ({...prevState, comments: newComments}));
+
+        setPosts((prevState) =>
+            prevState.map((post) => post.id === post_id ? {...post, comments: post.comments + 1} : post)
+        );
 
         const { data, error } = await supabase
         .from('posts')

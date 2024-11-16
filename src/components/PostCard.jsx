@@ -16,7 +16,7 @@ const PostCard = ({ post }) => {
     const [date, setDate] = useState({value: '', unit: ''})
     useEffect(() => {
         formatDate(post, setDate);
-    }, [post]);
+    }, []);
 
     return (
         <div className="flex flex-col my-4 bg-primary w-full rounded-lg cursor-pointer hover:bg-primary-dark" onClick={handleClick}>

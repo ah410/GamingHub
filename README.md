@@ -52,23 +52,25 @@ GIF created with ...
 
 ## Notes
 
-1. **Upvote Count Sync Issue**
+**Upvote Count Sync Issue**
 I encountered an issue with syncing the upvote count across pages. When a user clicked the upvote button on a post, the stats were updated correctly on the post details page. However, upon navigating back to the home page, the upvote count reverted to the original value instead of showing the updated one.
 
 **Solution**:
 I passed the `setPosts` function to the post details page. In the update logic, I used the `prevState` syntax and mapped over the previous state of posts. When updating the upvote count, I checked if the `post.id` matched the `post_id`. If it did, I updated the `upvotes` key by incrementing it, while keeping the rest of the posts unchanged. This ensured that the state was consistently updated across both pages.
 
-2. **Comment State Update & Date Format Issue**
+--- 
+
+**Comment State Update & Date Format Issue**
 In my `CreateComment` component, I added functionality to dynamically update the comment list for a post after a user submits a comment. However, this caused a crash in the `formatDate` helper function. Specifically, I received a TypeError indicating that it couldn't read properties of `undefined` when trying to create a substring. The error pointed to line 9 in my `Comment` component.
 
 **Diagnosis & Solution**:
 I traced the issue to the `commentObject` being passed to the `formatDate` function. I realized that the issue stemmed from the way I was creating and updating the comment in the state. Prior to submitting a comment, everything worked fine, but the state update was causing problems. I refactored the comment creation logic by appending `.select()` to the database insert to inspect the returned data. Upon testing, I found that the returned data was an array, but I needed a dictionary for each comment. I fixed this by accessing the first element of the array (`data[0]`) in the `setState` function to correctly store the comment as an object.
 
-3. Documentation that helped
- - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
- - [Tailwind CSS](https://tailwindcss.com/)
- - [useNavigate and useLocation](https://dev.to/esedev/how-to-pass-and-access-data-from-one-route-to-another-with-uselocation-usenavigate-usehistory-hooks-1g5m)
- - [Date() In JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+**Documentation that helped**
+  - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+  - [Tailwind CSS](https://tailwindcss.com/)
+  - [useNavigate and useLocation](https://dev.to/esedev/how-to-pass-and-access-data-from-one-route-to-another-with-uselocation-usenavigate-usehistory-hooks-1g5m)
+  - [Date() In JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
 
 ## License

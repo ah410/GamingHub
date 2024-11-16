@@ -1,3 +1,12 @@
+const isSameDate = (postedDate, currentDate) => {
+    for (let i = 0; i < postedDate.length; i++) {
+        if (postedDate[i] != currentDate[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const formatDate = (post, setDate) => {
     if (post) {
         // ISO Format - YYY-MM-DDTHH:mm:ss.sssss
@@ -15,17 +24,29 @@ const formatDate = (post, setDate) => {
         let current_time = current_date[1].split(':');
         
         // If date is the same, check the time difference. Else, check the date difference. Work from biggest to smallest difference.
-        if (posted_ymd == current_ymd) {
+        if (isSameDate(posted_ymd, current_ymd)) {
             let hour = parseInt(current_time[0]) - parseInt(posted_time[0]);
             let minute = parseInt(current_time[1]) - parseInt(posted_time[1]);
             let second = parseInt(current_time[2]) - parseInt(posted_time[2]);
 
             if (hour != 0) {
-                setDate({value: hour, unit: 'hours'});
-            } else if (min != 0) {
-                setDate({value: minute, unit: 'minutes'});
+                if (hour > 1) {
+                    setDate({value: hour, unit: 'hours'});
+                } else {
+                    setDate({value: hour, unit: 'hour'});
+                }
+            } else if (minute != 0) {
+                if (minute > 1) {
+                    setDate({value: minute, unit: 'minutes'});
+                } else {
+                    setDate({value: minute, unit: 'minute'});
+                }
             } else {
-                setDate({value: second, unit: 'seconds'});
+                if (second > 1) {
+                    setDate({value: second, unit: 'seconds'});
+                } else {
+                    setDate({value: second, unit: 'second'});
+                }
             }
 
         } else {
@@ -34,11 +55,23 @@ const formatDate = (post, setDate) => {
             let day = parseInt(current_ymd[2]) - parseInt(posted_ymd[2]);
 
             if (year != 0) {
-                setDate({value: year, unit: 'years'});
+                if (year > 1) {
+                    setDate({value: year, unit: 'years'});
+                } else {
+                    setDate({value: year, unit: 'year'});
+                }
             } else if (month != 0) {
-                setDate({value: month, unit: 'months'});
+                if (month > 1) {
+                    setDate({value: month, unit: 'months'});
+                } else {
+                    setDate({value: month, unit: 'months'});
+                }
             } else {
-                setDate({value: day, unit: 'days'});
+                if (day > 1) {
+                    setDate({value: day, unit: 'days'});
+                } else {
+                    setDate({value: day, unit: 'day'});
+                }
             }
         }
     }

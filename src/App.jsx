@@ -11,8 +11,10 @@ import PostDetails from './pages/PostDetails';
 import Navigation from './components/Navigation';
 
 const App = () => {
-  // 1. Create a posts state variable to hold the posts data
+  // 1. Create state variables
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
   // 2. Create a function to fetch all the posts from the database
   const fetchPosts = async () => {
@@ -37,7 +39,7 @@ const App = () => {
   const routes = useRoutes([
     {
       path: '/',
-      element: <Home posts={posts} />
+      element: <Home posts={posts} filteredPosts={filteredPosts} searchValue={searchValue} />
     },
     {
       path: '/create_post',
@@ -55,7 +57,7 @@ const App = () => {
 
   return (
     <>
-      <Navigation/>
+      <Navigation posts={posts} setFilteredPosts={setFilteredPosts} setSearchValue={setSearchValue}/>
       {routes}
     </>
   )

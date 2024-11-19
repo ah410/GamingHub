@@ -57,20 +57,20 @@ const CreatePost = () => {
 
 
     return(
-        <div>
-            <h1>Create Post Page!</h1>
-            <form className='max-w-sm mx-auto'>
+        <div className='h-max sm:h-fit md:h-46 lg:h-96 flex flex-col justify-between'>
+            <h1>Conquer Post Creation By Making a Post!</h1>
+            <form className='max-w-sm mx-auto w-full m-24'>
                 <div className="title-div mb-5">
                     <label htmlFor="title" className='block'>Title:</label>
-                    <input type="text" className='text-background' required id="title" name="title" onChange={handleChange}/>
+                    <input type="text" className='mt-1 text-background rounded-md' required id="title" name="title" onChange={handleChange}/>
                 </div>
 
                 <div className="description-div mb-5">
                     <label htmlFor="description" className='block'>Description:</label>
-                    <input type="text" className='text-background' id="description" name="description" onChange={handleChange}/>
+                    <textarea rows={5} type="text" className='mt-1 text-background w-full rounded-md' id="description" name="description" onChange={handleChange}/>
                 </div>
 
-                <button type='submit' onClick={handleSubmit}>Post</button>
+                <button type='submit' onClick={handleSubmit} className="bg-primary p-3 rounded-lg hover:bg-primary-dark">Post</button>
             </form>
         </div>
     )

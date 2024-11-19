@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import mario from '../assets/mario.gif';
 
 const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts }) => {
     // 1. Make a function to filter
@@ -21,30 +22,35 @@ const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts })
 
     return (
         <nav className="nav-bar bg-primary flex fixed top-0 left-0 justify-center items-center w-full">
-            <ul className="nav-ul flex">
-                <li className="flex justify-center items-center p-4">GameHub</li>
+            <ul className="nav-ul flex justify-between w-full">
+                <div className="flex items-center justify-center">
+                    <li className="flex justify-center items-center p-4">👾 GameHub 👾</li>
+                    <img src={mario} alt="" width={90} className="rounded-lg p-1" />
+                </div>
 
                 <li className="flex justify-center items-center p-4">
                     <input 
-                        className="form-input rounded-full px-2 py-1 bg-background focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary" 
+                        className="form-input rounded-full bg-background focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary" 
                         type="text" 
                         placeholder="Search..."
                         onChange={(inputValue) => searchPosts(inputValue.target.value)}
                     />
                 </li>
                 
-                <li className="flex justify-center items-center p-4">
-                    <Link to='/' className="nav-a  px-2 py-1">Home</Link>
-                </li>
-                
-                <li className="flex justify-center items-center p-4">
-                    <Link to='/create_post' className="nav-a flex  hover:bg-secondary rounded-full p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mr-2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        <div>Create Post</div>
-                    </Link>
-                </li>
+                <div className="flex items-center justify-center p-4">
+                    <li className="flex justify-center items-center">
+                        <Link to='/' className="px-4 py-2 hover:bg-secondary rounded-full">Home</Link>
+                    </li>
+                    
+                    <li className="flex justify-center items-center">
+                        <Link to='/create_post' className="flex hover:bg-secondary rounded-full px-4 py-2 m-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mr-2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            <div>Create Post</div>
+                        </Link>
+                    </li>
+                </div>
             </ul>
         </nav>
       );

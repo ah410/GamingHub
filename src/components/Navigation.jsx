@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 
-const Navigation = ({ posts, setFilteredPosts, setSearchValue }) => {
+const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts }) => {
     // 1. Make a function to filter
     const searchPosts = (searchInput) => {
+        // ANYTIME you search, you want to reset the sortedPosts back to an empty list
+        setSortedPosts([]);
+
         setSearchValue(searchInput);
 
         if (searchInput !== '') {

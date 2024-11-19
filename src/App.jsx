@@ -14,6 +14,7 @@ const App = () => {
   // 1. Create state variables
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [sortedPosts, setSortedPosts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
   // 2. Create a function to fetch all the posts from the database
@@ -39,7 +40,7 @@ const App = () => {
   const routes = useRoutes([
     {
       path: '/',
-      element: <Home posts={posts} filteredPosts={filteredPosts} searchValue={searchValue} />
+      element: <Home posts={posts} filteredPosts={filteredPosts} searchValue={searchValue} sortedPosts={sortedPosts} setSortedPosts={setSortedPosts} />
     },
     {
       path: '/create_post',
@@ -57,7 +58,7 @@ const App = () => {
 
   return (
     <>
-      <Navigation posts={posts} setFilteredPosts={setFilteredPosts} setSearchValue={setSearchValue}/>
+      <Navigation posts={posts} setFilteredPosts={setFilteredPosts} setSearchValue={setSearchValue} setSortedPosts={setSortedPosts} />
       {routes}
     </>
   )

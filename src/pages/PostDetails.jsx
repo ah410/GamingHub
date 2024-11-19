@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import { supabase } from "../../client.js";
@@ -9,6 +9,9 @@ const PostDetails = ({ setPosts }) => {
     // Grab location and post_id
     const location = useLocation();
     const { post_id } = useParams();
+
+    // Initialize navigation hook
+    const navigate = useNavigate();
 
     // Set initial state of the post variable to the post details passed in from homepage using useNavigation and useLocation hooks to pass the data over
     const [post, setPost] = useState(location.state.post);
@@ -97,10 +100,15 @@ const PostDetails = ({ setPosts }) => {
             setComments(data); // List of dicts(comments)
         }
     }
+    
+    // Create a function to edit current post on click of a button
+    const goToEdit = () => {
+        navigate('/edit_post/' + post_id);
+    }
 
 
     return(
-        <div className="container flex flex-col items-start h-max justify-between">
+        <div className="container flex flex-col items-start h-max mt-24 justify-between">
             <div className="bg-primary rounded-lg w-full">
                 <h1 className="p-4">{post && post.title}</h1>
                 <p className="p-4 text-left">Description: {post && post.description}</p>
@@ -132,7 +140,10 @@ const PostDetails = ({ setPosts }) => {
                         <span>{post && post.comments}</span>
                     </div>
                 </div>
+            </div>
 
+            <div>
+                <button onClick={goToEdit} className="bg-secondary p-3 m-2 rounded-lg hover:bg-secondary-dark">Edit Post</button>
             </div>
 
             <div className="comments flex flex-col justify-center w-full my-10 p-4">

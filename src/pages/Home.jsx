@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PostCard from '../components/PostCard';
+import { BlinkBlur } from 'react-loading-indicators';
 
 const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) => {
     const [sortingConfig, setSortingConfig] = useState({orderType: null, ascending: true});
@@ -32,7 +33,7 @@ const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) 
     const displayPosts = sortedPosts.length !== 0 ? sortedPosts : (searchValue !== '' ? filteredPosts : posts);
 
     return(
-        <div className='w-full flex flex-col items-center mx-auto p-4'>
+        <div className='w-full flex flex-col items-center mx-auto p-4 mt-12'>
             <h1>Home Page!</h1>
 
             <div className='w-full flex items-center'>
@@ -42,9 +43,10 @@ const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) 
             </div>
 
             {
-                displayPosts && displayPosts.map((post) => {
-                    return <PostCard post={post} key={post.id}/>
-                })
+                displayPosts && displayPosts.length !== 0 ? displayPosts.map((post) => {
+                    return <PostCard post={post} key={post.id}/> 
+                }) : 
+                    <BlinkBlur color='#3153cc' size='medium'/>
             }
         </div>
     )

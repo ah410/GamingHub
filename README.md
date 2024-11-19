@@ -63,14 +63,25 @@ I passed the `setPosts` function to the post details page. In the update logic, 
 **Comment State Update & Date Format Issue**
 In my `CreateComment` component, I added functionality to dynamically update the comment list for a post after a user submits a comment. However, this caused a crash in the `formatDate` helper function. Specifically, I received a TypeError indicating that it couldn't read properties of `undefined` when trying to create a substring. The error pointed to line 9 in my `Comment` component.
 
-**Diagnosis & Solution**:
+**Solution**:
 I traced the issue to the `commentObject` being passed to the `formatDate` function. I realized that the issue stemmed from the way I was creating and updating the comment in the state. Prior to submitting a comment, everything worked fine, but the state update was causing problems. I refactored the comment creation logic by appending `.select()` to the database insert to inspect the returned data. Upon testing, I found that the returned data was an array, but I needed a dictionary for each comment. I fixed this by accessing the first element of the array (`data[0]`) in the `setState` function to correctly store the comment as an object.
+
+---
+
+**Getting Filter and Sort Working Together**
+I had an issue in my `Home` page where my filter and sort weren't working together. I managed to get both working independently, but when a page was sorted by either `created_at` or `upvotes`, the filter wouldn't work when I tried searching by title in my input field.
+
+**Solution**:
+Instead of having the state variable `sortedPosts` and its function `setSortedPosts` defined in `Home.jsx`, I instead defined them in `App.jsx` just like with the `filteredPosts` state variable. When I had `sortedPosts` in `Home.jsx`, the issue would stem from my ternary operators to figure out which posts to display. To break it down, if my `sortedPosts` wasn't empty, I would always render `sortedPosts`. This is true even if the user wanted to type something in the search bar. The page wouldn't re-render based on search input. So, my thought process was that anytime I was searching for a post in my search bar, I would reset my `sortedPosts` array to an empty array. That way, when I'm searching, I can properly display `filteredPosts` instead of `sortedPosts`. From there, when I clicked on the sort buttons, I would base the sorting off of a base array that is either `filteredPosts` or `posts` depending on if the `searchValue` is empty or not.
+
 
 **Documentation that helped**
   - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
   - [Tailwind CSS](https://tailwindcss.com/)
   - [useNavigate and useLocation](https://dev.to/esedev/how-to-pass-and-access-data-from-one-route-to-another-with-uselocation-usenavigate-usehistory-hooks-1g5m)
   - [Date() In JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+  - [Comparing Two Date Strings](https://www.geeksforgeeks.org/how-to-compare-two-date-strings-in-typescript/)
+  - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
 
 
 ## License

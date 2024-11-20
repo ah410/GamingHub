@@ -10,7 +10,7 @@ const Comment = ({ comment, commentObject }) => {
     }, [])
 
     return (
-        <div className="w-full py-4 m-2 flex flex-col items-start">
+        <div className="w-full py-4 my-2 flex flex-col items-start bg-background rounded-md">
             <div className='flex items-center'>
                 <img src={avator} alt="avator" className='max-w-10 rounded-full m-2' />
                 <span>• {datePosted.value} {datePosted.unit} •</span>

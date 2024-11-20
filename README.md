@@ -84,6 +84,9 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
   - [Comparing Two Date Strings](https://www.geeksforgeeks.org/how-to-compare-two-date-strings-in-typescript/)
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
 
+## Upcoming Improvements
+1. Responsive Navbar
+2. Authentication - User Login/Signup
 
 ## License
 

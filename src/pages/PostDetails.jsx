@@ -108,10 +108,10 @@ const PostDetails = ({ setPosts }) => {
 
 
     return(
-        <div className="container flex flex-col items-start h-max mt-24 justify-between w-3/4">
-            <div className="bg-background-card shadow-md  rounded-lg w-full">
-                <h1 className="p-4">{post && post.title}</h1>
-                <p className="p-4 text-left">Description: {post && post.description}</p>
+        <div className="container flex flex-col items-start h-max mt-24 mb-8 justify-between bg-background-card shadow-md rounded-lg ">
+            <div className="w-full text-left">
+                <h1 className="p-4 text-4xl">{post && post.title}</h1>
+                <p className="p-4 text-left text-md">Description: {post && post.description}</p>
 
                 <div className="stats flex p-4">
                     <div className="likes flex mr-3 bg-background p-2 rounded-full">
@@ -142,8 +142,13 @@ const PostDetails = ({ setPosts }) => {
                 </div>
             </div>
 
-            <div>
-                <button onClick={goToEdit} className="bg-secondary p-3 my-2 rounded-lg hover:bg-secondary-dark">Edit Post</button>
+            <div className="pl-4">
+                <button onClick={goToEdit} className="bg-secondary p-3 my-2 rounded-lg hover:bg-secondary-dark flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-1">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                    </svg>
+                    <span>Edit Post</span>
+                </button>
             </div>
 
             <div className="comments flex flex-col justify-center w-full my-10 p-4">
@@ -151,7 +156,7 @@ const PostDetails = ({ setPosts }) => {
 
                 { comments.length !== 0 ? comments.map((comment) => 
                     <Comment comment={comment.description} commentObject={comment} key={comment.id}/>) : 
-                    <div>No Comments Yet!</div>
+                    <div className="w-full pt-4 my-2">No Comments Yet!</div>
                 }
             </div>
         </div>

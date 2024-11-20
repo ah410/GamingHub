@@ -19,8 +19,8 @@ const PostCard = ({ post }) => {
     }, []);
 
     return (
-        <div className="flex flex-col my-4 bg-primary w-full rounded-lg cursor-pointer hover:bg-primary-dark" onClick={handleClick}>
-            <div className="posted-date p-2 flex justify-between">
+        <div className="flex flex-col my-4 bg-primary w-full rounded-lg cursor-pointer hover:bg-primary-dark shadow-md" onClick={handleClick}>
+            <div className="posted-date p-4 flex justify-between">
                 <span className="">Posted {date.value} {date.unit} ago</span>
                 {/*Conditionally render tags if exist*/
                 post.tags ? post.tags.map((tag, index) => {
@@ -31,12 +31,10 @@ const PostCard = ({ post }) => {
                 }
             </div>
 
-            <div className="header flex justify-between">
-                <h2 className="p-2">Title: {post.title}</h2>
-            </div>
+            <h2 className="p-4 text-xl text-start">{post.title}</h2>
 
             <div className="stats flex justify-between">
-                <div className="likes p-2 flex">
+                <div className="likes p-4 flex">
                     <span className="mr-4 flex items-center">
                         <span className="mr-1">
                             <svg rpl="" fill="currentColor" height="16" icon-name="upvote-outline" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">

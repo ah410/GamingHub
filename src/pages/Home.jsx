@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PostCard from '../components/PostCard';
-import { BlinkBlur } from 'react-loading-indicators';
+import { OrbitProgress } from 'react-loading-indicators';
 
 const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) => {
     const [sortingConfig, setSortingConfig] = useState({orderType: null, ascending: true});
@@ -33,9 +33,7 @@ const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) 
     const displayPosts = sortedPosts.length !== 0 ? sortedPosts : (searchValue !== '' ? filteredPosts : posts);
 
     return(
-        <div className='w-full flex flex-col items-center mx-auto p-8 mt-12'>
-            <h1>Home Page!</h1>
-
+        <div className='flex flex-col items-center justify-center mx-auto w-5/6 md:w-3/4 lg:w-1/2 mt-12'>
             <div className='w-full flex items-center'>
                 <span>Order By: </span>
                 <button onClick={() => handleClick('created_at')} className='bg-secondary rounded-lg p-2 m-2 hover:bg-secondary-dark'>Date Posted</button>
@@ -46,7 +44,7 @@ const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) 
                 displayPosts && displayPosts.length !== 0 ? displayPosts.map((post) => {
                     return <PostCard post={post} key={post.id}/> 
                 }) : 
-                    <BlinkBlur color='#3153cc' size='medium'/>
+                    searchValue == '' && <OrbitProgress color='#3153cc' size='medium'/>
             }
         </div>
     )

@@ -21,8 +21,8 @@ const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts })
     }
 
     return (
-        <nav className="nav-bar bg-primary flex fixed top-0 left-0 justify-center items-center w-full">
-            <ul className="nav-ul flex justify-between w-full">
+        <nav className="bg-primary flex justify-center items-center w-screen">
+            <ul className="flex justify-between w-full">
                 <div className="flex items-center justify-center">
                     <li className="flex justify-center items-center p-4">👾 GameHub 👾</li>
                     <img src={mario} alt="" width={90} className="rounded-lg p-1" />
@@ -30,7 +30,7 @@ const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts })
 
                 <li className="flex justify-center items-center p-4">
                     <input 
-                        className="form-input rounded-full bg-background focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary" 
+                        className="rounded-full bg-background focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary" 
                         type="text" 
                         placeholder="Search..."
                         onChange={(inputValue) => searchPosts(inputValue.target.value)}
@@ -43,8 +43,8 @@ const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts })
                     </li>
                     
                     <li className="flex justify-center items-center">
-                        <Link to='/create_post' className="flex hover:bg-secondary rounded-full px-4 py-2 m-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mr-2">
+                        <Link to='/create_post' className="flex bg-secondary hover:bg-secondary-dark rounded-lg px-3 py-2 m-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mr-1">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
                             <div>Create Post</div>

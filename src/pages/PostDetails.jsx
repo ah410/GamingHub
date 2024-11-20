@@ -108,8 +108,8 @@ const PostDetails = ({ setPosts }) => {
 
 
     return(
-        <div className="container flex flex-col items-start h-max mt-24 justify-between">
-            <div className="bg-primary rounded-lg w-full">
+        <div className="container flex flex-col items-start h-max mt-24 justify-between w-3/4">
+            <div className="bg-background-card shadow-md  rounded-lg w-full">
                 <h1 className="p-4">{post && post.title}</h1>
                 <p className="p-4 text-left">Description: {post && post.description}</p>
 
@@ -143,7 +143,7 @@ const PostDetails = ({ setPosts }) => {
             </div>
 
             <div>
-                <button onClick={goToEdit} className="bg-secondary p-3 m-2 rounded-lg hover:bg-secondary-dark">Edit Post</button>
+                <button onClick={goToEdit} className="bg-secondary p-3 my-2 rounded-lg hover:bg-secondary-dark">Edit Post</button>
             </div>
 
             <div className="comments flex flex-col justify-center w-full my-10 p-4">

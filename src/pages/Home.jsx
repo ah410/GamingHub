@@ -33,7 +33,7 @@ const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) 
     const displayPosts = sortedPosts.length !== 0 ? sortedPosts : (searchValue !== '' ? filteredPosts : posts);
 
     return(
-        <div className='w-full flex flex-col items-center mx-auto p-4 mt-12'>
+        <div className='w-full flex flex-col items-center mx-auto p-8 mt-12'>
             <h1>Home Page!</h1>
 
             <div className='w-full flex items-center'>

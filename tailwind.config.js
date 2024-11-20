@@ -14,6 +14,7 @@ export default {
         'secondary-dark': '#B85A10',
         'background': '#242424',
         'background-hover': '#2e2e2e',
+        'background-card': '#3A3A3A',
         'card-background': '#374151',
         'accent': '#DC2626',
         'accent-dark': '#B91C1C'

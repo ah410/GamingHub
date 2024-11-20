@@ -57,9 +57,9 @@ const CreatePost = () => {
 
 
     return(
-        <div className='h-max sm:h-fit md:h-46 lg:h-96 flex flex-col justify-between'>
-            <h1>Conquer Post Creation By Making a Post!</h1>
-            <form className='max-w-sm mx-auto w-full m-24'>
+        <div className='flex flex-col justify-between my-10'>
+            <h1>Create New Post</h1>
+            <form className='max-w-sm mx-auto w-full mt-10'>
                 <div className="title-div mb-5">
                     <label htmlFor="title" className='block'>Title:</label>
                     <input type="text" className='mt-1 text-background rounded-md' required id="title" name="title" onChange={handleChange}/>
@@ -70,7 +70,7 @@ const CreatePost = () => {
                     <textarea rows={5} type="text" className='mt-1 text-background w-full rounded-md' id="description" name="description" onChange={handleChange}/>
                 </div>
 
-                <button type='submit' onClick={handleSubmit} className="bg-primary p-3 rounded-lg hover:bg-primary-dark">Post</button>
+                <button type='submit' onClick={handleSubmit} className="bg-primary py-2 px-5 rounded-lg hover:bg-primary-dark">Post</button>
             </form>
         </div>
     )

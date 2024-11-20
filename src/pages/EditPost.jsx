@@ -89,9 +89,9 @@ const EditPost = () => {
     }
 
     return(
-        <div>
+        <div className="my-10">
             <h1>Edit Post: {postDatabase && postDatabase.title}</h1>
-            <form className='max-w-sm mx-auto mt-20'>
+            <form className='max-w-sm mx-auto mt-10'>
                 <div className="title-div mb-5">
                     <label htmlFor="title" className='block'>Title:</label>
                     <input type="text" className='text-background mt-1' required id="title" name="title" onChange={handleChange}/>

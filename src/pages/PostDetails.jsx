@@ -4,6 +4,8 @@ import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import { supabase } from "../../client.js";
 import Comment from "../components/Comment.jsx";
 import CreateComment from "../components/CreateComment.jsx";
+import formatDate from "../utils/formatDate.js";
+
 
 const PostDetails = ({ setPosts }) => {
     // Grab location and post_id
@@ -106,12 +108,19 @@ const PostDetails = ({ setPosts }) => {
         navigate('/edit_post/' + post_id);
     }
 
+    // Format the date to grab the time differential from current date to the date the post was created at
+    const [date, setDate] = useState({value: '', unit: ''})
+    useEffect(() => {
+        formatDate(post, setDate);
+    }, []);
+
 
     return(
-        <div className="container flex flex-col items-start h-max mt-24 mb-8 justify-between bg-background-card shadow-md rounded-lg w-5/6 lg:w-1/2 2xl:w-1/3 max-w-5xl ">
+        <div className="container flex flex-col items-start h-max mt-24 mb-8 justify-between bg-background-card shadow-md rounded-lg w-11/12 sm:w-5/6 lg:w-1/2 2xl:w-2/5">
             <div className="w-full text-left">
-                <h1 className="p-4 text-4xl">{post && post.title}</h1>
-                <p className="p-4 text-left text-md">Description: {post && post.description}</p>
+                <h1 className="p-4 text-4xl font-medium">{post && post.title}</h1>
+                <div className="px-4 mb-8 text-gray-400">Posted • {date.value} {date.unit} ago •</div>
+                <p className="p-4 text-left text-md">{post && post.description}</p>
 
                 <div className="stats flex p-4">
                     <div className="likes flex mr-3 bg-background p-2 rounded-full">

@@ -33,7 +33,7 @@ const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) 
     const displayPosts = sortedPosts.length !== 0 ? sortedPosts : (searchValue !== '' ? filteredPosts : posts);
 
     return(
-        <div className='flex flex-col items-center justify-center mx-auto w-5/6 md:w-3/4 lg:w-1/2 mt-12'>
+        <div className='flex flex-col items-center justify-center mx-auto w-11/12 sm:5/6 md:w-3/4 lg:w-1/2 mt-12'>
             <div className='w-full flex items-center'>
                 <span>Order By: </span>
                 <button onClick={() => handleClick('created_at')} className='bg-secondary rounded-lg p-2 m-2 hover:bg-secondary-dark'>Date Posted</button>

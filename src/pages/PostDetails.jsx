@@ -108,7 +108,7 @@ const PostDetails = ({ setPosts }) => {
 
 
     return(
-        <div className="container flex flex-col items-start h-max mt-24 mb-8 justify-between bg-background-card shadow-md rounded-lg ">
+        <div className="container flex flex-col items-start h-max mt-24 mb-8 justify-between bg-background-card shadow-md rounded-lg w-5/6 lg:w-1/2 2xl:w-1/3 max-w-5xl ">
             <div className="w-full text-left">
                 <h1 className="p-4 text-4xl">{post && post.title}</h1>
                 <p className="p-4 text-left text-md">Description: {post && post.description}</p>

@@ -93,7 +93,7 @@ const EditPost = () => {
 
     return(
         <div className="flex flex-col justify-between my-10 text-left w-5/6 lg:w-1/2 2xl:w-1/3 max-w-5xl">
-            <h1>Edit Post</h1>
+            <h1  className='text-3xl font-bold'>Edit Post</h1>
             <form className='mx-auto w-full mt-10'>
                 <div className="title-div mb-5 w-full">
                     <label htmlFor="title" className='block'>Title</label>

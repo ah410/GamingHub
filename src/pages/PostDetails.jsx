@@ -120,7 +120,7 @@ const PostDetails = ({ setPosts }) => {
             <div className="w-full text-left">
                 <h1 className="p-4 text-4xl font-medium">{post && post.title}</h1>
                 <div className="px-4 mb-8 text-gray-400">Posted • {date.value} {date.unit} ago •</div>
-                <p className="p-4 text-left text-md">{post && post.description}</p>
+                <p className="p-4 text-left text-md whitespace-pre-line">{post && post.description}</p>
 
                 <div className="stats flex p-4">
                     <div className="likes flex mr-3 bg-background p-2 rounded-full">

@@ -87,6 +87,7 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
   - [Date() In JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
   - [Comparing Two Date Strings](https://www.geeksforgeeks.org/how-to-compare-two-date-strings-in-typescript/)
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
+  - [Managing Chunks Using Rollup Options](https://stackoverflow.com/questions/69260715/skipping-larger-chunks-while-running-npm-run-build)
 
 ## Upcoming Improvements
 1. Responsive Navbar

@@ -90,7 +90,8 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
 
 ## Upcoming Improvements
 1. Responsive Navbar
-2. Authentication - User Login/Signup
+2. Authentication - User Login/Signup (DONE)
+3. Add Image/Video Upload
 
 ## License
 

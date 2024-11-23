@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import PostCard from '../components/PostCard';
 import { OrbitProgress } from 'react-loading-indicators';
+import Login from './Login';
 
-const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts}) => {
+const Home = ({posts, filteredPosts, searchValue, sortedPosts, setSortedPosts, session, isLoading}) => {
+    if (isLoading == true) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+            <OrbitProgress color="#3153cc" size="medium" />
+            </div>
+        )
+    } else if (session === null) {
+        return (
+            <Login/>
+        )
+    }
+
     const [sortingConfig, setSortingConfig] = useState({orderType: null, ascending: true});
 
     const handleClick = (order_type) => {

@@ -18,6 +18,9 @@ export default {
         'card-background': '#374151',
         'accent': '#DC2626',
         'accent-dark': '#B91C1C'
+      },
+      backgroundImage: {
+        'game': "url('./src/assets/sparking-zero-background.png')"
       }
     },
   },

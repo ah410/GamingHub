@@ -20,7 +20,7 @@ export default {
         'accent-dark': '#B91C1C'
       },
       backgroundImage: {
-        'game': "url('./src/assets/sparking-zero-background.png')"
+        'game': "url('/src/assets/sparking-zero-background.webp')"
       }
     },
   },

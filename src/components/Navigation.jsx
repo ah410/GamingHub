@@ -63,9 +63,9 @@ const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts, s
                         />
                     </li>
                     
-                    <div className="flex items-center justify-center mr-3 py-2">
+                    <div className="flex items-center justify-center mr-4 py-2">
                         <li>
-                            <Link to='/create_post' className="flex items-center justify-center bg-secondary hover:bg-secondary-dark rounded-lg px-3 py-2 m-2">
+                            <Link to='/create_post' className="flex items-center justify-center bg-secondary hover:bg-secondary-dark rounded-lg px-3 py-2 m-2 shadow-md transition-all">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mr-1">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
@@ -73,7 +73,7 @@ const Navigation = ({ posts, setFilteredPosts, setSearchValue, setSortedPosts, s
                             </Link>
                         </li>
                         <li>
-                            <button className="flex items-center justify-center bg-accent hover:bg-accent-dark rounded-lg px-3 py-2" onClick={logout}>
+                            <button className="flex items-center justify-center border-2 border-accent text-accent hover:bg-accent hover:text-white rounded-lg px-3 py-2 transition-all" onClick={logout}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 mr-1">
                                     <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                                 </svg>

@@ -30,16 +30,18 @@ const Signup = () => {
 
     const signUpNewUser = async () => {
         const { data, error } = await supabase.auth.signUp({
-            email: 'example@email.com', 
-            password: 'example-password'
+            email: email, 
+            password: password
         })
         
         if (error) {
-            console.log("Error logging in: ", error);
+            console.log("Error signing up: ", error);
         } else {
-            console.log("Success logging in: ", data);
-            navigate('/');
+            console.log("Success signing up: ", data);
         }
+
+        window.location = '/';
+        alert("Confirmation email sent. Please check your inbox.");
     }
 
     return (

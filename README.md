@@ -93,6 +93,7 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
 1. Responsive Navbar
 2. Authentication - User Login/Signup (DONE)
 3. Add Image/Video Upload
+4. Light mode and dark mode
 
 ## License
 

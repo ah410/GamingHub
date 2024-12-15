@@ -12,6 +12,7 @@ const EditPost = () => {
     const [image, setImage] = useState('');
     const [imagePreview, setImagePreview] = useState('');
     const [imagePath, setImagePath] = useState('');
+    const fileInputRef = useRef(null);
     const [uuid, setUuid] = useState(uuidv4());
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     const maxFileSize = 50 * 1024 * 1024; // 50MB
@@ -218,6 +219,9 @@ const EditPost = () => {
         if (imagePreview !== '') {
             URL.revokeObjectURL(imagePreview); // Cleanup the the URL of the imagePreview on removal
         }
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
     }
 
     const handlePostDeletion = async (e) => {
@@ -288,7 +292,7 @@ const EditPost = () => {
                     <div className='flex justify-between'>
                         <div className="flex flex-wrap items-center gap-2 mt-1 font-medium">
                             <label className="cursor-pointer flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-md px-2 py-1 border-2 border-gray-400">
-                                <input type="file" accept="image/*" className="hidden" onChange={handleImageChange}/>
+                                <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} ref={fileInputRef}/>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-upload w-4 h-4 mr-2">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                     <polyline points="17 8 12 3 7 8"></polyline>

@@ -114,12 +114,28 @@ const PostDetails = ({ setPosts }) => {
         formatDate(post, setDate);
     }, []);
 
+    // Create a function to grab any images from supabase using getPublicUrl
+    const getImage = () => {
+        if (post.image_path) {
+            const { data } = supabase
+                .storage
+                .from('images_and_videos')
+                .getPublicUrl(`${post.image_path}`);
+            if (data) {
+                return data.publicUrl + '?t=' + new Date().getTime();
+            }
+        }
+    }
+
 
     return(
         <div className="container flex flex-col items-start h-max mt-24 mb-8 justify-between bg-background-card shadow-md rounded-lg w-11/12 sm:w-5/6 lg:w-1/2 2xl:w-2/5">
             <div className="w-full text-left">
                 <h1 className="p-4 text-4xl font-medium">{post && post.title}</h1>
-                <div className="px-4 mb-8 text-gray-400">Posted • {date.value} {date.unit} ago •</div>
+                <div className="px-4 mb-7 text-gray-400">Posted • {date.value} {date.unit} ago •</div>
+                <div className="flex items-center justify-center">
+                    { post.image_path && <img src={getImage()} alt="image for post" className="w-3/4 rounded-lg shadow-lg"/> }
+                </div>
                 <p className="p-4 text-left text-md whitespace-pre-line">{post && post.description}</p>
 
                 <div className="stats flex p-4">

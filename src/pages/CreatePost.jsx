@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../../client';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreatePost = () => {
-    // 1. Create a posts state variable to hold the posts data
-    const [post, setPost] = useState({title: '', description: '', upvotes: 0, downvotes: 0, comments: 0, tag: ''});
+    // Create state variables
+    const [post, setPost] = useState({title: '', description: '', upvotes: 0, downvotes: 0, comments: 0, tag: '', image_path: ''});
     const [tagsAreActive, setTagsAreActive] = useState({'Guide': false, 'Walkthrough': false, 'Tips': false, 'Discussion': false, 'Updates': false});
+    const [image, setImage] = useState('');
+    const [imagePreview, setImagePreview] = useState('');
+    const [uuid, setUuid] = useState(uuidv4());
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+    const maxFileSize = 50 * 1024 * 1024; // 50MB
     const tags = ['Guide', 'Walkthrough', 'Tips', 'Discussion', 'Updates'];
 
-    // 2. Create a function to handle input change
     const handleChange = (e) => {
-        const {name, value} = e.target;  // Deconstruct the name and value from the target
+        const { name, value } = e.target;  // Deconstruct the name and value from the target
         setPost((prev) => {
             return {
                 ...prev,  // Spread the previous state. Arrow function requires a return statement
@@ -18,13 +24,66 @@ const CreatePost = () => {
         })
     }
 
-    // 3. Create a function to handle the form submission
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const imageURL = URL.createObjectURL(file);
+
+        setImage(file);
+        setImagePreview(imageURL);
+        setPost((prev) => {
+            return {
+                ...prev,
+                image_path: `public/${uuid}.${file.name.split('.').pop()}`
+            }
+        });
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        addImage();
         addPost(post);
     }
 
-    // 4. Create an async function to send the data to the database
+    const addImage = async () => {
+        if (!allowedTypes.includes(image.type)) {
+            alert("File type not supported. Please upload a .jpeg, .jpg, .png, or .webp file.");
+            return;
+        }
+
+        if (image.size > maxFileSize) {
+            alert("File size too large. Please upload a file smaller than 50MB.");
+            return;
+        }
+
+        try {
+            const { data, error } = await supabase.storage
+                .from('images_and_videos')
+                .upload(`public/${uuid}.${image.name.split('.').pop()}`, image);
+   
+            if (error) {
+                console.log("Error updating image: ", error);
+            } else {
+                console.log("Success updating image: ", data);
+            }
+        } catch (err) {
+            console.log("Unexpected error uploading image: ", err);
+        }
+    }
+
+    const removeImage = (e) => {
+        e.preventDefault();
+        setImage('');
+        setImagePreview('');
+        setPost((prev) => {
+            return {
+                ...prev,
+                image_path: ''
+            }
+        });
+    }
+
+
+    // Create an async function to send the data to the database
     const addPost = async (post) => {   
         if (post.title === '') {
             alert('Please enter a title');
@@ -42,8 +101,7 @@ const CreatePost = () => {
             console.log("Post added successfully: ", data);
         }
 
-        window.location = '/';  // Redirect to the home page
-
+        window.location.href = '/';  // Redirect to the home page
     }
 
     // Create a function to handle tag selection
@@ -75,7 +133,7 @@ const CreatePost = () => {
             <h1 className='text-3xl font-bold'>Create New Post</h1>
             <form className='mx-auto w-full mt-10'>
                 <div className="title-div mb-5 w-full">
-                    <label htmlFor="title" className='block'>Title</label>
+                    <label htmlFor="title" className='block'>Title *</label>
                     <input type="text" className='mt-1 bg-background-card rounded-md w-full' required id="title" name="title" onChange={handleChange}/>
                 </div>
 
@@ -96,7 +154,36 @@ const CreatePost = () => {
                     </div>
                 </div>
 
-                <div className="description-div mb-5 w-full">
+                <div className='mb-5 flex flex-col'>
+                    <label>Media</label>
+                    <div className='flex justify-between'>
+                        <div className="flex flex-wrap items-center gap-2 mt-1 font-medium">
+                            <label className="cursor-pointer flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-md px-2 py-1 border-2 border-gray-400">
+                                <input type="file" accept="image/*" className="hidden" onChange={handleImageChange}/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-upload w-4 h-4 mr-2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" x2="12" y1="3" y2="15"></line>
+                                </svg>
+                                Upload image
+                            </label>
+                            {/* <button type="button" className="flex items-center justify-center  bg-gray-700 hover:bg-gray-600 rounded-md px-2 py-1 border-2 border-gray-400" title="Add image URL">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-link w-4 h-4 mr-2">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                                Add URL
+                            </button> */}
+                        </div>
+                        {imagePreview && <button onClick={removeImage}>X</button>}
+                    </div>
+                </div>
+
+                {imagePreview !== '' && 
+                    <div className='mb-5'><img src={imagePreview} alt="" /></div>    
+                }
+
+                <div className="mb-5 w-full">
                     <label htmlFor="description" className='block'>Content</label>
                     <textarea rows={7} type="text" className='mt-1 bg-background-card w-full rounded-md' id="description" name="description" onChange={handleChange}/>
                 </div>

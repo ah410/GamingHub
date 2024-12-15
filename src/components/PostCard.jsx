@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import formatDate from "../utils/formatDate.js";
+import { supabase } from "../../client.js";
 
 const PostCard = ({ post }) => {
     // Initialize the navigate hook
@@ -18,16 +19,37 @@ const PostCard = ({ post }) => {
         formatDate(post, setDate);
     }, []);
 
+    // Create a function to grab any images from supabase using getPublicUrl
+    const getImage = () => {
+        if (post.image_path) {
+            const { data } = supabase
+                .storage
+                .from('images_and_videos')
+                .getPublicUrl(`${post.image_path}`);
+            console.log(data);
+            if (data) {
+                // Utilize cache busting to ensure the image is always fresh (prevents old image from being displayed)
+                return data.publicUrl + '?t=' + new Date().getTime();
+            }
+        }
+    }
+
     return (
         <div className="flex flex-col my-4 bg-primary w-full rounded-lg cursor-pointer hover:bg-primary-dark shadow-md" onClick={handleClick}>
-            <div className="posted-date p-4 flex justify-between">
-                <span className="">Posted {date.value} {date.unit} ago</span>
-                <div className="flex">
-                    { post.tag && <span className={`rounded-full bg-secondary px-2 py-1`}>{post.tag}</span> }
+            <div className="flex flex-col">
+                <div className="posted-date p-4 flex justify-between">
+                    <span className="">Posted {date.value} {date.unit} ago</span>
+                    <div className="flex">
+                        { post.tag && <span className={`rounded-full bg-secondary px-2 py-1`}>{post.tag}</span> }
+                    </div>
                 </div>
+
+                <h2 className={`${post.image_path ? 'px-4' : 'p-4'} text-xl text-start`}>{post.title}</h2>
             </div>
 
-            <h2 className="p-4 text-xl text-start">{post.title}</h2>
+            <div className="flex items-center justify-center">
+                {post.image_path && <img src={getImage()} alt="image for post" className="w-3/4 rounded-lg shadow-lg mt-4"/>}
+            </div>
 
             <div className="stats flex justify-between">
                 <div className="likes p-4 flex">

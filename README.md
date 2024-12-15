@@ -4,7 +4,7 @@ Submitted by: **Ali Hamad**
 
 This web app: **Gaming Hub**
 
-Time spent: **35** hours spent in total
+Time spent: **45** hours spent in total
 
 ## Tech Stack
 
@@ -89,11 +89,13 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
   - [Managing Chunks Using Rollup Options](https://stackoverflow.com/questions/69260715/skipping-larger-chunks-while-running-npm-run-build)
 
-## Upcoming Improvements
-1. Responsive Navbar
+## Upcoming Improvements/Fixes
+1. Mobile Navbar
 2. Authentication - User Login/Signup (DONE)
-3. Add Image/Video Upload
+    - Thinking of allowing unauthenticated users to go to home page, but create posts only if authenticated
+3. Add Image/Video Upload (IN PROGRESS - Images done)
 4. Light mode and dark mode
+6. Add different tag colors for visual contrast
 
 ## License
 

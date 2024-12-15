@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { supabase } from '../../client';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,7 +26,14 @@ const CreatePost = () => {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        const imageURL = URL.createObjectURL(file);
+        let imageURL = '';
+
+        if (file) {
+            if (imagePreview !== '') {
+                URL.revokeObjectURL(imagePreview);  // Cleanup the old URL on new image upload
+            }
+            imageURL = URL.createObjectURL(file);
+        }
 
         setImage(file);
         setImagePreview(imageURL);
@@ -80,6 +87,9 @@ const CreatePost = () => {
                 image_path: ''
             }
         });
+        if (imagePreview !== '') {
+            URL.revokeObjectURL(imagePreview); // Cleanup the URL of the imagePreview on removal
+        }
     }
 
 

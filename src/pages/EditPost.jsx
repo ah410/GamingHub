@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../client";
 import { v4 as uuidv4 } from 'uuid';
@@ -76,8 +76,16 @@ const EditPost = () => {
     }
     // Handle changes for image
     const handleImageChange = (e) => {
-        const file = e.target.files[0];  // Grab the first file from the file input and set it to Image state variable
-        const imageURL = URL.createObjectURL(file);
+        const file = e.target.files[0];
+        let imageURL = '';
+
+        if (file) {
+            if (imagePreview !== '') {
+                URL.revokeObjectURL(imagePreview); // Cleanup the old URL on new image upload
+            }
+            imageURL = URL.createObjectURL(file);
+        }
+
         
         setImage(file);
         setImagePreview(imageURL);
@@ -207,6 +215,9 @@ const EditPost = () => {
                 image_path: ''
             }
         });
+        if (imagePreview !== '') {
+            URL.revokeObjectURL(imagePreview); // Cleanup the the URL of the imagePreview on removal
+        }
     }
 
     const handlePostDeletion = async (e) => {

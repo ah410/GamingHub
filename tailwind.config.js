@@ -10,6 +10,7 @@ export default {
         'primary': '#1E3A8A',
         'primary-dark': '#172c6a',
         'primary-light': '#3B6BBF',
+        'primary-light2': '#5A8ADF',
         'secondary': '#F97316',
         'secondary-dark': '#B85A10',
         'background': '#242424',

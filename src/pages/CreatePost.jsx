@@ -53,6 +53,10 @@ const CreatePost = () => {
     }
 
     const addImage = async () => {
+        // No image to upload on post creation, return early
+        if (image == '') {
+            return;
+        }
         if (!allowedTypes.includes(image.type)) {
             alert("File type not supported. Please upload a .jpeg, .jpg, .png, or .webp file.");
             return;

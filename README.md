@@ -91,14 +91,13 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
 
 ## Upcoming Improvements/Fixes
 1. Mobile Navbar
-2. Authentication - User Login/Signup (DONE)
-    - Thinking of allowing unauthenticated users to go to home page, but create posts only if authenticated
-3. Image/Video Upload (IN PROGRESS - Images done)
-4. Light mode and dark mode
-6. Different tag colors for visual contrast
-7. Resetting password page
-8. Toast notifications for login page and signup page
-9. Rich text editor for posts
+2. Video Upload
+3. Light mode and dark mode
+4. Different tag colors for visual contrast
+5. Resetting password page
+6. Toast notifications for login page and signup page
+7. Rich text editor for posts
+8. Sort by tags
 
 ## License
 

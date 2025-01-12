@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../client.js';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
     // Create State variables for username and password
@@ -32,11 +33,11 @@ const Login = () => {
             password: password
         })
         
+        // Toast notifications on error for login, else redirect to home page
         if (error) {
-            console.log("Error logging in: ", error);
+            toast.error(`${error.message}`, {theme: 'colored'});
         } else {
-            console.log("Success logging in: ", data);
-            navigate('/');
+            window.location = '/';
         }
     }
 
@@ -44,7 +45,7 @@ const Login = () => {
     return (
         <div className="h-screen w-screen flex items-center justify-center bg-cover bg-center bg-game">
             <div className='bg-gray-900 w-11/12 sm:5/6 md:w-3/5 xl:w-1/3 rounded-md p-6 shadow-md shadow-black'>
-                <span className='text-3xl'>Sign in to your account</span>
+                <span className='text-3xl'>Login in to your account</span>
                 <form className='flex flex-col mt-8'>
                     <div className='flex flex-col mb-5'>
                         <label htmlFor="email" className='text-left mb-1'>Email</label>
@@ -56,6 +57,7 @@ const Login = () => {
                     </div>
 
                     <button type='submit' className='bg-primary rounded-lg my-5 py-3 hover:bg-primary-dark' onClick={handleSubmit}>Log in to your account</button>
+                    <ToastContainer></ToastContainer>
                     <Link to='/signup' className='hover:underline text-primary-light'>Don't have an account? Register Here</Link>
                 </form>
             </div>

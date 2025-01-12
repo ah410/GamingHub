@@ -45,7 +45,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='./src/assets/gamingHub.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcG5qYmo0N3EwM3RiamV6ZjZuZjEzZmtnN3g1a2xrd3U5ejV3cjB4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JilCV9RjA5Z7aJC413/giphy.gif' title='Video WalkthroughVideo Walkthrough for GameHub' width='' alt='Video Walkthrough for GameHub' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with [ScreenToGif](https://www.screentogif.com/) for Windows
@@ -93,9 +93,12 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
 1. Mobile Navbar
 2. Authentication - User Login/Signup (DONE)
     - Thinking of allowing unauthenticated users to go to home page, but create posts only if authenticated
-3. Add Image/Video Upload (IN PROGRESS - Images done)
+3. Image/Video Upload (IN PROGRESS - Images done)
 4. Light mode and dark mode
-6. Add different tag colors for visual contrast
+6. Different tag colors for visual contrast
+7. Resetting password page
+8. Toast notifications for login page and signup page
+9. Rich text editor for posts
 
 ## License
 

@@ -4,7 +4,7 @@ Submitted by: **Ali Hamad**
 
 This web app: **Gaming Hub**
 
-Time spent: **45** hours spent in total
+Time spent: **55** hours spent in total
 
 ## Tech Stack
 
@@ -81,6 +81,7 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
 
 
 **Documentation that helped**
+
   - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
   - [Tailwind CSS](https://tailwindcss.com/)
   - [useNavigate and useLocation](https://dev.to/esedev/how-to-pass-and-access-data-from-one-route-to-another-with-uselocation-usenavigate-usehistory-hooks-1g5m)
@@ -89,15 +90,6 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
   - [Managing Chunks Using Rollup Options](https://stackoverflow.com/questions/69260715/skipping-larger-chunks-while-running-npm-run-build)
 
-## Upcoming Improvements/Fixes
-1. Mobile Navbar
-2. Video Upload
-3. Light mode and dark mode
-4. Different tag colors for visual contrast
-5. Resetting password page
-6. Toast notifications for login page and signup page
-7. Rich text editor for posts
-8. Sort by tags
 
 ## License
 

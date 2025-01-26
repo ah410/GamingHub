@@ -79,6 +79,14 @@ I had an issue in my `Home` page where my filter and sort weren't working togeth
 **Solution**:
 Instead of having the state variable `sortedPosts` and its function `setSortedPosts` defined in `Home.jsx`, I instead defined them in `App.jsx` just like with the `filteredPosts` state variable. When I had `sortedPosts` in `Home.jsx`, the issue would stem from my ternary operators to figure out which posts to display. To break it down, if my `sortedPosts` wasn't empty, I would always render `sortedPosts`. This is true even if the user wanted to type something in the search bar. The page wouldn't re-render based on search input. So, my thought process was that anytime I was searching for a post in my search bar, I would reset my `sortedPosts` array to an empty array. That way, when I'm searching, I can properly display `filteredPosts` instead of `sortedPosts`. From there, when I clicked on the sort buttons, I would base the sorting off of a base array that is either `filteredPosts` or `posts` depending on if the `searchValue` is empty or not.
 
+---
+
+**Removing Images**
+There was an issue in `CreatePost.jsx` where when I would add an image, remove it, then add it again, it wouldn't add properly. So, I would be left with nothing happening when I would go ahead and try to upload an image using the `input` tag. 
+
+**Solution**:
+In my code, I noticed that I was just resetting the state variables when I clicked on the X button to remove my image after adding an image. If there is no value in the state variable, the image preview doesn't showup. So, it works in terms of showing and removing the image preview. However, this wouldn't remove the image from the actual input tag. So, I searched online for ways to reset the input tag in React, and came across `useRef`. This hook is useful for manipulating input fields. So, when I call my `remvoeImage` function, I can simply check if my `fileInputRef` is not empty, and set it's current value to an empty string. That way, I can add and remove images without it hitching up and having an old value there that isn't getting reset after every remove.
+
 
 **Documentation that helped**
   - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
@@ -88,6 +96,7 @@ Instead of having the state variable `sortedPosts` and its function `setSortedPo
   - [Comparing Two Date Strings](https://www.geeksforgeeks.org/how-to-compare-two-date-strings-in-typescript/)
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
   - [Managing Chunks Using Rollup Options](https://stackoverflow.com/questions/69260715/skipping-larger-chunks-while-running-npm-run-build)
+  - [Reset Input Field Using useRef](https://stackoverflow.com/questions/62412963/how-to-reset-input-field-from-useref-in-react)
 
 ## Upcoming Improvements/Fixes
 1. Mobile Navbar

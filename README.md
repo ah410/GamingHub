@@ -4,7 +4,7 @@ Submitted by: **Ali Hamad**
 
 This web app: **Gaming Hub**
 
-Time spent: **45** hours spent in total
+Time spent: **55** hours spent in total
 
 ## Tech Stack
 
@@ -45,7 +45,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='./src/assets/gamingHub.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcG5qYmo0N3EwM3RiamV6ZjZuZjEzZmtnN3g1a2xrd3U5ejV3cjB4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JilCV9RjA5Z7aJC413/giphy.gif' title='Video WalkthroughVideo Walkthrough for GameHub' width='' alt='Video Walkthrough for GameHub' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with [ScreenToGif](https://www.screentogif.com/) for Windows
@@ -89,6 +89,7 @@ In my code, I noticed that I was just resetting the state variables when I click
 
 
 **Documentation that helped**
+
   - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
   - [Tailwind CSS](https://tailwindcss.com/)
   - [useNavigate and useLocation](https://dev.to/esedev/how-to-pass-and-access-data-from-one-route-to-another-with-uselocation-usenavigate-usehistory-hooks-1g5m)
@@ -96,15 +97,7 @@ In my code, I noticed that I was just resetting the state variables when I click
   - [Comparing Two Date Strings](https://www.geeksforgeeks.org/how-to-compare-two-date-strings-in-typescript/)
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
   - [Managing Chunks Using Rollup Options](https://stackoverflow.com/questions/69260715/skipping-larger-chunks-while-running-npm-run-build)
-  - [Reset Input Field Using useRef](https://stackoverflow.com/questions/62412963/how-to-reset-input-field-from-useref-in-react)
-
-## Upcoming Improvements/Fixes
-1. Mobile Navbar
-2. Authentication - User Login/Signup (DONE)
-    - Thinking of allowing unauthenticated users to go to home page, but create posts only if authenticated
-3. Add Image/Video Upload (IN PROGRESS - Images done)
-4. Light mode and dark mode
-6. Add different tag colors for visual contrast
+  - [PostgreSQL Triggers](https://www.postgresql.org/docs/current/plpgsql-trigger.html)
 
 ## License
 

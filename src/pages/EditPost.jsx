@@ -313,7 +313,7 @@ const EditPost = () => {
                 </div>
 
                 { imagePreview !== '' &&
-                    <div className="mb-5"><img src={imagePreview} alt="" /></div>    
+                    <div className="mb-5 flex items-center justify-center"><img src={imagePreview} alt="" className="rounded-lg shadow-lg" /></div>    
                 }
 
                 <div className="description-div mb-5">

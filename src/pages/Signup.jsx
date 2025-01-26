@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../client.js';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import PasswordStrengthBar from 'react-password-strength-bar';
 
@@ -28,20 +29,36 @@ const Signup = () => {
         signUpNewUser();
     }
 
-    const signUpNewUser = async () => {
-        const { data, error } = await supabase.auth.signUp({
-            email: email, 
-            password: password
-        })
-        
-        if (error) {
-            console.log("Error signing up: ", error);
-        } else {
-            console.log("Success signing up: ", data);
-        }
+    const checkUserExists = async () => {
+        const { data, error } = await supabase.from('users').select().eq('email', email);
 
-        window.location = '/';
-        alert("Confirmation email sent. Please check your inbox.");
+        if (data.length == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    const signUpNewUser = async () => {
+        const emailExists = await checkUserExists();
+
+        // Toast notifications for signup, redirect to home page on successful signup
+        if (emailExists == true) {
+            toast.error("Account already exists", {theme: 'colored'});
+        } else {
+            const { data, error } = await supabase.auth.signUp({
+                email: email, 
+                password: password
+            });
+
+            if (error) {
+                toast.error(`${error.message}`, {theme: 'colored'});
+            } else {
+                toast.success("Confirmation email sent. Please check your inbox.", {theme: 'colored'});
+                setEmail('');
+                setPassword('');
+            }
+        }
     }
 
     return (
@@ -61,6 +78,7 @@ const Signup = () => {
 
                     <button className='bg-primary rounded-lg my-5 py-3 hover:bg-primary-dark' onClick={handleSubmit}>Create account</button>
                     <Link to='/login' className='hover:underline text-primary-light'>Already have an account? Login here</Link>
+                    <ToastContainer></ToastContainer>
                 </form>
             </div>
         </div>

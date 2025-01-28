@@ -8,6 +8,15 @@ const PostCard = ({ post }) => {
     // Initialize the navigate hook
     const navigate = useNavigate();
 
+    // Set the mapping for tag colors
+    const tagColorsMap = {
+        'Guide': 'bg-pink-500',
+        'Walkthrough': 'bg-purple-500',
+        'Tips': 'bg-green-500',
+        'Discussion': 'bg-orange-500',
+        'Updates': 'bg-red-500',
+    };
+
     // Handle click functionality when a user clicks on a post
     const handleClick = () => {
         navigate('/post/' + post.id, { state: { post: post } });
@@ -40,7 +49,7 @@ const PostCard = ({ post }) => {
                 <div className="posted-date p-4 flex justify-between">
                     <span className="">Posted {date.value} {date.unit} ago</span>
                     <div className="flex">
-                        { post.tag && <span className={`rounded-full bg-secondary px-2 py-1`}>{post.tag}</span> }
+                        { post.tag && <span className={`rounded-full ${tagColorsMap[post.tag]} px-2 py-1`}>{post.tag}</span> }
                     </div>
                 </div>
 

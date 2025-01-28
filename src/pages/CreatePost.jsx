@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 const CreatePost = () => {
     // Create state variables
     const [post, setPost] = useState({title: '', description: '', upvotes: 0, downvotes: 0, comments: 0, tag: '', image_path: ''});
-    const [tagsAreActive, setTagsAreActive] = useState({'Guide': false, 'Walkthrough': false, 'Tips': false, 'Discussion': false, 'Updates': false});
     const [image, setImage] = useState('');
     const [imagePreview, setImagePreview] = useState('');
     const fileInputRef = useRef(null);
@@ -13,7 +12,16 @@ const CreatePost = () => {
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     const maxFileSize = 50 * 1024 * 1024; // 50MB
+
+    const [tag, setTag] = useState('');
     const tags = ['Guide', 'Walkthrough', 'Tips', 'Discussion', 'Updates'];
+    const tagColorsMap = {
+        'Guide': 'bg-pink-500',
+        'Walkthrough': 'bg-purple-500',
+        'Tips': 'bg-green-500',
+        'Discussion': 'bg-orange-500',
+        'Updates': 'bg-red-500',
+      };
 
     const handleChange = (e) => {
         const { name, value } = e.target;  // Deconstruct the name and value from the target
@@ -123,25 +131,24 @@ const CreatePost = () => {
     }
 
     // Create a function to handle tag selection
-    const handleTagSelection = (e, tag) => {
+    const handleTagSelection = (e, clickedTag) => {
         e.preventDefault();
 
-        // Check if any of the tags are active, if so return, if not, set the tag to active
-        const tagActive = {};
-        Object.keys(tagsAreActive).map((tag) => {
-            if (tagsAreActive[tag]) {
-                tagActive[tag] = true;
-            } 
-        });
-
-        // If there is an active tag AND the active tag isn't the one clicked on, return. Else, set the clicked tag to active and add it to the post
-        if (Object.values(tagActive)[0] && Object.keys(tagActive)[0] != tag) {
-            return;
-        } else {
-            setTagsAreActive({...tagsAreActive, [tag]: !tagsAreActive[tag]});   // ES6: Computed Property Names. [varName] to grab string literal of variable
+        // Case 1: Clicked on the active tag - set tag state variable to empty and remove from posts
+        // Case 2: Clicked on a non-active tag while no active tag exists - set clicked tag as active tag in state variable
+        // Case 3: Clicked on a non-active tag while an active tag exists - do nothing
+        if (tag != '' && clickedTag == tag) {
+            setTag('');
             setPost((prevState) => {
-                return {...prevState, tag: tag};
-            });
+                return {...prevState, tag: ''};
+            })
+        } else if (tag == '' && clickedTag != tag) {
+            setTag(clickedTag);
+            setPost((prevState) => {
+                return {...prevState, tag: clickedTag};
+            });        
+        } else {
+            return;
         }
     }
 
@@ -158,14 +165,15 @@ const CreatePost = () => {
                 <div className='flex flex-col justify-center mb-5'>
                     <span>Post Category</span>
                     <div className='flex flex-wrap mt-2 gap-2'>
-                        {tags.map((tag, index) => {
+                        {tags.map((currentTag, index) => {
                             return (
-                                <button key={index} onClick={(event) => handleTagSelection(event,tag)} className={`flex ${tagsAreActive[tag] ? 'bg-secondary-dark' : 'bg-gray-700'} px-3 py-1 rounded-full items-center justify-center font-medium hover:bg-secondary transition-colors duration-200`}>
+                                // *Important: Rendering the different tag colors on clicks ONLY works in the conditional logic, not ouside. This is due to how Tailwind processes classes.
+                                <button key={index} onClick={(event) => handleTagSelection(event,currentTag)} className={`flex ${tag != '' && tag == currentTag ? `${tagColorsMap[tag]}` : `bg-gray-700 hover:${tagColorsMap[currentTag]}`} px-3 py-1 rounded-full items-center justify-center font-medium hover:${tagColorsMap[currentTag]} transition-colors duration-200`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-1">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
                                     </svg>
-                                    {tag}
+                                    {currentTag}
                                 </button>
                             )
                         })}

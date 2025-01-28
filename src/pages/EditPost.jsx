@@ -6,8 +6,15 @@ import { v4 as uuidv4 } from 'uuid';
 const EditPost = () => {
     const { post_id } = useParams();
 
-    const [tagsAreActive, setTagsAreActive] = useState({'Guide': false, 'Walkthrough': false, 'Tips': false, 'Discussion': false, 'Updates': false});
+    const [tag, setTag] = useState('');
     const tags = ['Guide', 'Walkthrough', 'Tips', 'Discussion', 'Updates'];
+    const tagColorsMap = {
+        'Guide': 'bg-pink-500',
+        'Walkthrough': 'bg-purple-500',
+        'Tips': 'bg-green-500',
+        'Discussion': 'bg-orange-500',
+        'Updates': 'bg-red-500',
+    };
 
     const [image, setImage] = useState('');
     const [imagePreview, setImagePreview] = useState('');
@@ -23,6 +30,9 @@ const EditPost = () => {
     useEffect(() => {
         fetchPost();
     }, []);
+    useEffect(() => {
+        console.log("Tag: ", tag);
+    }, [tag]);
 
     const fetchPost = async () => {
         const { data, error } = await supabase
@@ -35,6 +45,7 @@ const EditPost = () => {
         } else {
             console.log("Success fetching post: ", data);
             setPostDetails({title: data[0].title, description: data[0].description, tag: data[0].tag, image_path: data[0].image_path});
+            setTag(data[0].tag);
         
             // If there is an existing image path, set the uuid to the image path to override the default uuid and set the form's input image input field
             if (data[0].image_path !== '') {
@@ -110,26 +121,26 @@ const EditPost = () => {
             });
         }
     }
-    // Handle tag changes
-    const handleTagSelection = (e, tag) => {
+    
+    // Create a function to handle tag selection
+    const handleTagSelection = (e, clickedTag) => {
         e.preventDefault();
 
-        // Check if any of the tags are active, if so return, if not, set the tag to active
-        const tagActive = {};
-        Object.keys(tagsAreActive).map((tag) => {
-            if (tagsAreActive[tag]) {
-                tagActive[tag] = true;
-            } 
-        });
-
-        // If there is an active tag AND the active tag isn't the one clicked on, return. Else, set the clicked tag to active and add it to the post
-        if (Object.values(tagActive)[0] && Object.keys(tagActive)[0] != tag) {
-            return;
-        } else {
-            setTagsAreActive({...tagsAreActive, [tag]: !tagsAreActive[tag]});   // ES6: Computed Property Names. [varName] to grab string literal of variable
+        // Case 1: Clicked on the active tag - set tag state variable to empty and remove from posts
+        // Case 2: Clicked on a non-active tag while no active tag exists - set clicked tag as active tag in state variable
+        // Case 3: Clicked on a non-active tag while an active tag exists - do nothing
+        if (tag != '' && clickedTag == tag) {
+            setTag('');
             setPostDetails((prevState) => {
-                return {...prevState, tag: tag};
-            });
+                return {...prevState, tag: ''};
+            })
+        } else if (tag == '' && clickedTag != tag) {
+            setTag(clickedTag);
+            setPostDetails((prevState) => {
+                return {...prevState, tag: clickedTag};
+            });        
+        } else {
+            return;
         }
     }
 
@@ -273,14 +284,15 @@ const EditPost = () => {
                 <div className='flex flex-col justify-center mb-5'>
                     <span>Post Category</span>
                     <div className='flex flex-wrap mt-2 gap-2'>
-                        {tags.map((tag, index) => {
+                        {tags.map((currentTag, index) => {
                             return (
-                                <button key={index} onClick={(event) => handleTagSelection(event,tag)} className={`flex ${tagsAreActive[tag] ? 'bg-secondary-dark' : 'bg-gray-700'} px-3 py-1 rounded-full items-center justify-center font-medium hover:bg-secondary transition-colors duration-200`}>
+                                // *Important: Rendering the different tag colors on clicks ONLY works in the conditional logic, not ouside. This is due to how Tailwind processes classes.
+                                <button key={index} onClick={(event) => handleTagSelection(event,currentTag)} className={`flex ${tag !== '' && tag == currentTag ? `${tagColorsMap[tag]}` : `bg-gray-700 hover:${tagColorsMap[currentTag]}`} px-3 py-1 rounded-full items-center justify-center font-medium transition-colors duration-200`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-1">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
                                     </svg>
-                                    {tag}
+                                    {currentTag}
                                 </button>
                             )
                         })}

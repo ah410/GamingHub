@@ -21,7 +21,7 @@ const EditPost = () => {
     const [imagePath, setImagePath] = useState('');
     const fileInputRef = useRef(null);
     const [uuid, setUuid] = useState(uuidv4());
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/avif'];
     const maxFileSize = 50 * 1024 * 1024; // 50MB
 
     const [ postDetails, setPostDetails ] = useState({title: '', description: '', tag: '', image_path: ''});

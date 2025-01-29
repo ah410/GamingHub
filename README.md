@@ -87,6 +87,14 @@ There was an issue in `CreatePost.jsx` where when I would add an image, remove i
 **Solution**:
 In my code, I noticed that I was just resetting the state variables when I clicked on the X button to remove my image after adding an image. If there is no value in the state variable, the image preview doesn't showup. So, it works in terms of showing and removing the image preview. However, this wouldn't remove the image from the actual input tag. So, I searched online for ways to reset the input tag in React, and came across `useRef`. This hook is useful for manipulating input fields. So, when I call my `removeImage` function, I can simply check if my `fileInputRef` is not empty, and set it's current value to an empty string. That way, I can add and remove images without it hitching up and having an old value there that isn't getting reset after every remove.
 
+---
+
+**404 Error Pages On Reload**
+On Vercel, anytime a user tried reloading the website, there would be a 404 error. This seemed to be occurring due to how Vercel handles React applications. It will try and handle the client-side rendering itself on reload. However, it doesn't have the routes in the `dist/` folder on its backend.
+
+**Solution**:
+I needed to create a `vercel.json` file to properly map all routes to the `index.html` file. In a dictionary, I specify `"rewrites"`, which includes a `"source"` and `"destination"`. The source being the regex `"/(.*)"` which simply translates to any character(.) zero or more times(*). The destination being `"index.html"`. This ensures that all of my routes are handled properly by `React Router` instead of Vercel.
+
 
 **Documentation that helped**
 
@@ -98,6 +106,8 @@ In my code, I noticed that I was just resetting the state variables when I click
   - [Subtracting Dates](https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/)
   - [Managing Chunks Using Rollup Options](https://stackoverflow.com/questions/69260715/skipping-larger-chunks-while-running-npm-run-build)
   - [PostgreSQL Triggers](https://www.postgresql.org/docs/current/plpgsql-trigger.html)
+  - [Rewrites in Vercel](https://stackoverflow.com/questions/75963788/why-is-my-vercel-project-giving-me-an-error-404-on-refresh)
+
 
 ## License
 

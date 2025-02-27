@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../../client.js';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,6 +7,19 @@ const Login = () => {
     // Create State variables for username and password
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        const message = sessionStorage.getItem("toastMessage");
+
+        if (message) {
+            toast.success(message, {theme: 'colored'});
+
+            // Ensure enough time exists for the message to be grabbed before its deleted
+            setTimeout(() => {
+                sessionStorage.removeItem("toastMessage");
+            }, 2000);
+        }
+    }, []);
 
     // Create function to handle sign up submission
     const handleChange = (e) => {

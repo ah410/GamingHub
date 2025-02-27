@@ -10,7 +10,7 @@ const Signup = () => {
     // Create State variables for username and password
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     // Create function to handle sign up submission
     const handleChange = (e) => {
@@ -54,9 +54,11 @@ const Signup = () => {
             if (error) {
                 toast.error(`${error.message}`, {theme: 'colored'});
             } else {
-                toast.success("Confirmation email sent. Please check your inbox.", {theme: 'colored'});
                 setEmail('');
                 setPassword('');
+
+                sessionStorage.setItem("toastMessage", "Confirmation email sent. Please check your inbox.")
+                navigate('/login');
             }
         }
     }
